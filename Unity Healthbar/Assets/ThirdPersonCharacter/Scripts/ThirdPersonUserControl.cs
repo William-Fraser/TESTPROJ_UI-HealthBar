@@ -138,6 +138,28 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             respawning = true;
         }
 
+        private void OnTriggerStay(Collider other)
+        {
+            if (other.tag == "Heal")
+            {
+                StartCoroutine("Healing");
+            }
+            else if (other.tag == "Deadly")
+            {
+                StartCoroutine("Damaging");
+            }
+        }
+        IEnumerator Healing()
+        {
+            Heal(2);
+            yield return new WaitForSeconds(0.10f);
+        }
+        IEnumerator Damaging()
+        {
+            TakeDamage(2);
+            yield return new WaitForSeconds(0.10f);
+        }
+
         //handles respawn animations / starts from update
         IEnumerator Respawn()
         {

@@ -16,16 +16,12 @@ public class HealZone : MonoBehaviour
         active = false;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerStay(Collider other)
     {
-        active = true;
-        StartCoroutine("Heal");
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        active = false;
-        StopCoroutine("Heal");
+        if (other.tag == "Heal")
+        {
+            StartCoroutine("Heal");
+        }
     }
 
     IEnumerator Heal()
